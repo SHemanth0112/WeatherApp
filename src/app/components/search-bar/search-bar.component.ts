@@ -1,6 +1,10 @@
 import { Component, EventEmitter, Output, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Observable, Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { CityAutocompleteService, CitySuggestion } from '../../core/services/city-autocomplete.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-search-bar',
@@ -17,6 +21,10 @@ export class SearchBarComponent implements OnInit {
   isValid = true;
   errorMessage = '';
 
+  // Autocomplete state
+  suggestions$: Observable<CitySuggestion[]> | null = null;
+  private inputChange$ = new Subject<string>();
+  constructor(private autocompleteService: CityAutocompleteService) {}
   ngOnInit(): void {
     // Focus the input on component initialization
     setTimeout(() => {
@@ -24,6 +32,13 @@ export class SearchBarComponent implements OnInit {
         this.cityInput.nativeElement.focus();
       }
     }, 100);
+
+    // Wire up debounced input to suggestions stream
+    this.suggestions$ = this.inputChange$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      switchMap(q => this.autocompleteService.searchCities(q, environment.openWeatherApiKey, 6))
+    );
   }
 
   onSearch(): void {
@@ -46,6 +61,7 @@ export class SearchBarComponent implements OnInit {
     this.cityName = value ?? '';
     this.isValid = true;
     this.errorMessage = '';
+    this.inputChange$.next(this.cityName);
   }
 
   private validateInput(): void {
@@ -78,5 +94,13 @@ export class SearchBarComponent implements OnInit {
     this.isValid = true;
     this.errorMessage = '';
     this.cityInput.nativeElement.focus();
+  }
+
+  onSelectSuggestion(s: CitySuggestion): void {
+    this.cityName = `${s.name}`;
+    // Keep existing behavior: do not auto-search, let user press Enter/click
+    setTimeout(() => {
+      this.cityInput.nativeElement.focus();
+    }, 0);
   }
 }

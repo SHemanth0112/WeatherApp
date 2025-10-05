@@ -35,7 +35,20 @@
         ✕
       </button>
     </div>
-    
+  
+    <ul class="suggestions" *ngIf="suggestions$ | async as suggestions" role="listbox" [attr.aria-expanded]="(suggestions?.length ?? 0) > 0">
+      <li
+        *ngFor="let s of suggestions"
+        (click)="onSelectSuggestion(s)"
+        class="suggestion-item"
+        role="option"
+        [attr.aria-label]="s.state ? s.name + ', ' + s.state + ', ' + s.country : s.name + ', ' + s.country"
+      >
+        <span class="city">{{ s.name }}</span>
+        <span class="meta">{{ s.state ? s.state + ', ' : ''}}{{ s.country }}</span>
+      </li>
+    </ul>
+
     <div 
       *ngIf="!isValid && errorMessage" 
       id="error-message" 

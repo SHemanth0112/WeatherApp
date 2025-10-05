@@ -46,6 +46,43 @@
   animation: slideIn 0.3s ease-out;
 }
 
+.suggestions {
+  position: absolute;
+  top: calc(100% + 0.25rem);
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.06);
+  list-style: none;
+  margin: 0;
+  padding: 0.25rem 0;
+  max-height: 260px;
+  overflow-y: auto;
+  z-index: 20;
+}
+
+.suggestion-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+}
+
+.suggestion-item:hover {
+  background: #f3f4f6;
+}
+
+.suggestion-item .city {
+  font-weight: 600;
+}
+
+.suggestion-item .meta {
+  color: #6b7280;
+}
+
 .input.invalid {
   border-color: #e74c3c;
   box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
@@ -74,5 +111,13 @@
     position: static;
     margin-top: 0.5rem;
     border-radius: 8px;
+  }
+
+  .suggestions {
+    position: static;
+    margin-top: 0.5rem;
+    box-shadow: none;
+    border-radius: 8px;
+    max-height: 200px;
   }
 }
