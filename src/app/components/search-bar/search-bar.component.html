@@ -1,0 +1,49 @@
+<div class="search-container">
+  <div class="search-form">
+    <div class="input-group">
+      <input
+        #cityInput
+        type="text"
+        [value]="cityName"
+        (keypress)="onKeyPress($event)"
+        (input)="onInputChange(cityInput.value)"
+        [class.invalid]="!isValid"
+        placeholder="Enter city name (e.g., London, Paris, Tokyo)"
+        class="input"
+        aria-label="City name"
+        aria-describedby="error-message"
+        autocomplete="off"
+      />
+      <button
+        type="button"
+        (click)="onSearch()"
+        [disabled]="!cityName.trim()"
+        class="btn"
+        aria-label="Search weather"
+      >
+        <span class="search-icon">🔍</span>
+        Search
+      </button>
+      <button
+        *ngIf="cityName"
+        type="button"
+        (click)="clearInput()"
+        class="btn btn-secondary btn-small"
+        aria-label="Clear search"
+        title="Clear search"
+      >
+        ✕
+      </button>
+    </div>
+    
+    <div 
+      *ngIf="!isValid && errorMessage" 
+      id="error-message" 
+      class="error-message"
+      role="alert"
+      aria-live="polite"
+    >
+      {{ errorMessage }}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<div *ngIf="forecast && forecast.length > 0" class="forecast-container fade-in">
+  <h2 class="forecast-title">5-Day Forecast</h2>
+  
+  <div class="forecast-grid">
+    <div 
+      *ngFor="let day of forecast; let i = index" 
+      class="forecast-card"
+      [class.forecast-card-first]="i === 0"
+    >
+      <div class="forecast-header">
+        <div class="forecast-day">{{ getDayName(day.date) }}</div>
+        <div class="forecast-date">{{ getFormattedDate(day.date) }}</div>
+      </div>
+      
+      <div class="forecast-weather">
+        <img 
+          [src]="getWeatherIconUrl(day.weather.icon)" 
+          [alt]="day.weather.description"
+          class="forecast-icon"
+        />
+        <div class="forecast-condition">{{ day.weather.description | titlecase }}</div>
+      </div>
+      
+      <div class="forecast-temps">
+        <div class="temp-high">{{ getTemperature(day.temp_max) }}°</div>
+        <div class="temp-separator">/</div>
+        <div class="temp-low">{{ getTemperature(day.temp_min) }}°</div>
+      </div>
+      
+      <div class="forecast-details">
+        <div class="forecast-humidity">
+          <span class="humidity-icon">💧</span>
+          <span class="humidity-value">{{ getHumidity(day.humidity) }}%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="forecast && forecast.length === 0" class="forecast-empty">
+  <p>No forecast data available</p>
+</div>

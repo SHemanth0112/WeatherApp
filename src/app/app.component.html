@@ -1,0 +1,117 @@
+<div class="app-container">
+  <header class="app-header">
+    <h1 class="app-title">🌤️ Weather App</h1>
+    <p class="app-subtitle">Get current weather and 5-day forecast for any city</p>
+  </header>
+
+  <main class="app-main">
+    <!-- Search Section -->
+    <section class="search-section">
+      <app-search-bar 
+        (citySearch)="onCitySearch($event)"
+        class="search-component"
+      ></app-search-bar>
+      
+      <!-- Last searched city info -->
+      <div *ngIf="state.lastSearchedCity && !hasSearched" class="last-city-info">
+        <p class="last-city-text">
+          Last searched: <strong>{{ state.lastSearchedCity }}</strong>
+        </p>
+        <button 
+          (click)="onClearLastCity()" 
+          class="btn btn-secondary btn-small"
+          aria-label="Clear last searched city"
+        >
+          Clear
+        </button>
+      </div>
+    </section>
+
+    <!-- Loading State -->
+    <section *ngIf="state.loading" class="loading-section">
+      <app-loading-spinner 
+        [message]="'Fetching weather data...'"
+        size="large"
+      ></app-loading-spinner>
+    </section>
+
+    <!-- Error State -->
+    <section *ngIf="state.error && !state.loading" class="error-section">
+      <app-error-message 
+        [message]="state.error"
+        (retry)="onRetry()"
+      ></app-error-message>
+    </section>
+
+    <!-- Weather Data -->
+    <section *ngIf="hasWeatherData && !state.loading && !state.error" class="weather-section">
+      <!-- Current Weather -->
+      <div class="current-weather-container">
+        <app-weather-display 
+          [weather]="state.currentWeather"
+        ></app-weather-display>
+        
+        <!-- Forecast Toggle -->
+        <div *ngIf="canShowForecast" class="forecast-toggle-container">
+          <label class="toggle-switch">
+            <input 
+              type="checkbox" 
+              [checked]="showForecast"
+              (change)="onToggleForecast()"
+              aria-label="Toggle 5-day forecast"
+            />
+            <span class="slider"></span>
+          </label>
+          <span class="toggle-label">Show 5-day forecast</span>
+        </div>
+      </div>
+
+      <!-- Forecast -->
+      <div *ngIf="showForecast && canShowForecast" class="forecast-container">
+        <app-forecast 
+          [forecast]="state.forecast"
+        ></app-forecast>
+      </div>
+    </section>
+
+    <!-- Welcome State -->
+    <section *ngIf="!hasSearched && !state.loading && !state.error" class="welcome-section">
+      <div class="welcome-card">
+        <h2>Welcome to Weather App</h2>
+        <p>Enter a city name above to get current weather conditions and 5-day forecast.</p>
+        <div class="welcome-features">
+          <div class="feature">
+            <span class="feature-icon">🌡️</span>
+            <span>Current temperature and conditions</span>
+          </div>
+          <div class="feature">
+            <span class="feature-icon">📊</span>
+            <span>Detailed weather information</span>
+          </div>
+          <div class="feature">
+            <span class="feature-icon">📅</span>
+            <span>5-day weather forecast</span>
+          </div>
+          <div class="feature">
+            <span class="feature-icon">💾</span>
+            <span>Remembers your last search</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p>
+      Data provided by 
+      <a 
+        href="https://openweathermap.org/api" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="footer-link"
+      >
+        OpenWeatherMap
+      </a>
+    </p>
+  </footer>
+</div>

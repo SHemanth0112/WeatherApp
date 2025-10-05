@@ -1,0 +1,280 @@
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  text-align: center;
+  padding: 2.5rem 0 1.5rem;
+  color: white;
+}
+
+.app-title {
+  font-size: 3rem;
+  font-weight: 300;
+  margin: 0 0 0.5rem 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.app-subtitle {
+  font-size: 1.25rem;
+  margin: 0;
+  opacity: 0.9;
+  font-weight: 400;
+}
+
+.app-main {
+  flex: 1;
+  padding: 0 1rem 2.5rem;
+}
+
+.search-section {
+  margin-bottom: 2rem;
+}
+
+.search-component {
+  margin-bottom: 1rem;
+}
+
+.last-city-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.last-city-text {
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+  font-weight: 500;
+}
+
+.loading-section,
+.error-section {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.weather-section {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.current-weather-container {
+  margin-bottom: 2rem;
+}
+
+.forecast-toggle-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2rem 0 0.5rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.3);
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #0984e3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.toggle-label {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.forecast-container {
+  margin-top: 1rem;
+}
+
+.welcome-section {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.welcome-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 3rem;
+  text-align: center;
+  max-width: 600px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.welcome-card h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0 0 1rem 0;
+}
+
+.welcome-card p {
+  font-size: 1.125rem;
+  color: #7f8c8d;
+  margin: 0 0 2rem 0;
+  line-height: 1.6;
+}
+
+.welcome-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  text-align: left;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(9, 132, 227, 0.05);
+  border-radius: 8px;
+  border: 1px solid rgba(9, 132, 227, 0.1);
+}
+
+.feature-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.feature span:last-child {
+  color: #2c3e50;
+  font-weight: 500;
+}
+
+.app-footer {
+  text-align: center;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-link {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .app-title {
+    font-size: 2.5rem;
+  }
+  
+  .app-subtitle {
+    font-size: 1.125rem;
+  }
+  
+  .app-main {
+    padding: 0 0.75rem 1rem;
+  }
+  
+  .last-city-info {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .forecast-toggle-container {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .welcome-card {
+    padding: 2rem;
+    margin: 1rem;
+  }
+  
+  .welcome-card h2 {
+    font-size: 1.75rem;
+  }
+  
+  .welcome-features {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .feature {
+    padding: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-title {
+    font-size: 2rem;
+  }
+  
+  .app-subtitle {
+    font-size: 1rem;
+  }
+  
+  .welcome-card {
+    padding: 1.25rem;
+    margin: 0.5rem;
+  }
+  
+  .welcome-card h2 {
+    font-size: 1.5rem;
+  }
+}
