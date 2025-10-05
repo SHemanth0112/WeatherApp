@@ -18,46 +18,11 @@ A responsive Angular weather application that displays current weather condition
 - npm (version 8 or higher)
 - Angular CLI (version 16 or higher)
 
-## Setup Instructions
-
-### 1. Install Dependencies
-
-```bash
-npm install
-```
-
-### 2. Get OpenWeatherMap API Key
-
-1. Visit [OpenWeatherMap](https://openweathermap.org/api)
-2. Sign up for a free account
-3. Navigate to the API keys section
-4. Copy your API key
-
-### 3. Configure API Key
-
-Edit `src/environments/environment.ts` and replace `YOUR_API_KEY_HERE` with your actual API key:
-
-```typescript
 export const environment = {
   production: false,
-  openWeatherApiKey: 'your_actual_api_key_here',
+  openWeatherApiKey: 'api_key',
   openWeatherApiUrl: 'https://api.openweathermap.org/data/2.5'
 };
-```
-
-### 4. Run the Application
-
-```bash
-ng serve --open
-```
-
-The application will open in your browser at `http://localhost:4200`.
-
-## Build for Production
-
-```bash
-ng build
-```
 
 The build artifacts will be stored in the `dist/` directory.
 
@@ -103,28 +68,7 @@ src/
 - **CSS3**: Responsive styling with flexbox and grid
 - **OpenWeatherMap API**: Weather data source
 
-## Browser Support
 
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-
-## Development
-
-### Running Tests
-
-```bash
-ng test
-```
-
-### Code Linting
-
-```bash
-ng lint
-```
-
-## Troubleshooting
 
 ### Common Issues
 
